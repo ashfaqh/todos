@@ -8,7 +8,24 @@ if (Meteor.isClient) {
     },
     isDone: function() {
       return this.isDone ? 'done' : '';
-    }
+    },
+    isChecked: function() {
+      return this.isDone;
+    }    
+  });
+  Template.TodoPanel.events({
+    'mouseover .todoItem': function() {
+      console.log('mouse over');
+    },
+    'click [class=delete]': function(event, tmpl) {
+      var id = this._id;
+      Meteor.call('remove', id);
+    },
+    'click [name=isDone]': function(event, tmpl) {
+      var id = this._id;
+      var isDone = tmpl.find('input').checked;
+      Meteor.call('setDone', id, isDone);
+    }    
   });
   Template.TodoForm.events({
     'submit form': function(event, tmpl) {
@@ -19,21 +36,9 @@ if (Meteor.isClient) {
       form.reset();
     }
   });
-  Template.TodoItem.helpers({
-    isChecked: function() {
-      return this.isDone;
-    },
-    isDone: function() {
-      return this.isDone ? 'done' : '';
-    }    
-  });
-  Template.TodoItem.events({
-    'click [name=isDone]': function(event, tmpl) {
-      var id = this._id;
-      var isDone = tmpl.find('input').checked;
-      Meteor.call('setDone', id, isDone);
-    }
-  });
+/*  Template.TodoItem.events({
+
+  }); */
  Template.TodoCount.helpers({
     completedItems: function() {
       return Todos.find( {isDone: true} ).count();
@@ -65,6 +70,9 @@ if (Meteor.isServer) {
           isDone: isDone
         }
       });
+    },
+    remove: function(id) {
+      Todos.remove({_id: id});
     }
   });
 }

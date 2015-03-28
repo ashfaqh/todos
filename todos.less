@@ -2,3 +2,32 @@
 .done {
 	text-decoration: line-through;
 }
+
+.todoItem {
+	-webkit-column-width: 700px; /* Chrome, Safari, Opera */
+	-moz-column-width: 700px; /* Firefox */
+	column-width: 700px;
+}
+
+.glyphicon-trash {
+	color: grey;
+	cursor: pointer;
+	cursor: hand;
+	visibility: hidden;
+}
+
+.table-hover tbody tr:hover td:last-child .glyphicon-trash {
+	visibility: visible;
+}
+
+.createDate {
+	color: grey;
+	visibility: hidden;
+	-webkit-column-width: 100px; /* Chrome, Safari, Opera */
+	-moz-column-width: 100px; /* Firefox */
+	column-width: 100px;	
+}
+
+.table-hover tbody tr:hover .createDate {
+	visibility: visible;
+}

@@ -25,27 +25,29 @@
 
 <template name="TodoPanel">
   <div class="todoPanel">
-  	<table class="table table-striped">
+  	<table class="table table-hover">
   	{{#each items}}
       <tbody>
       <tr>
   		<td valign="bottom" class="todoItem {{isDone}}">
-  			{{> TodoItem}}
+        <div class="checkbox-inline">
+          <p>
+          <input type="checkbox" name="isDone" checked="{{isChecked}}" />
+          <div class="{{isDone}}">{{todoItem}}</div>
+          </p>
+        </div>
   		</td>
+      <td>
+        <time class="createDate" datetime='2014-06-19'>{{createdOn}}</time>
+      </td>
+      <td>
+        <div class="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></div>
+      </td>
       </tr>
       </tbody>
   	{{/each}}
   	</table>
   </div>
-</template>
-
-<template name="TodoItem">
-	<div class="checkbox-inline">
-  <p>
-		<input type="checkbox" name="isDone" checked="{{isChecked}}" />
-		<div class="{{isDone}}">{{todoItem}}</div>
-  </p>
-	</div>
 </template>
 
 <template name="TodoCount">
