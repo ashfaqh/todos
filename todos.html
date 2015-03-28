@@ -1,0 +1,53 @@
+<head>
+  <title>todos</title>
+</head>
+
+<body>
+  <div class="container">
+  	{{> loginButtons}}
+  	<br>
+  	<br>
+  	{{> TodoForm}}
+  	{{> TodoPanel}}
+    {{> TodoCount}}
+  </div>
+</body>
+
+<template name="TodoForm">
+  	<form calss="form-group">
+      {{#if currentUser}}
+  		  <input type="text" class="form-control" placeholder="Create To-Do Item..." name="todoItem">
+      {{else}}
+        <input type="text" class="form-control" readonly="" placeholder="Sign in to created To-Do">
+      {{/if}}
+  	</form>	
+</template>
+
+<template name="TodoPanel">
+  <div class="todoPanel">
+  	<table class="table table-striped">
+  	{{#each items}}
+      <tbody>
+      <tr>
+  		<td valign="bottom" class="todoItem {{isDone}}">
+  			{{> TodoItem}}
+  		</td>
+      </tr>
+      </tbody>
+  	{{/each}}
+  	</table>
+  </div>
+</template>
+
+<template name="TodoItem">
+	<div class="checkbox-inline">
+  <p>
+		<input type="checkbox" name="isDone" checked="{{isChecked}}" />
+		<div class="{{isDone}}">{{todoItem}}</div>
+  </p>
+	</div>
+</template>
+
+<template name="TodoCount">
+  {{completedItems}} / {{totalItems}} to-do completed
+</template>
