@@ -10,3 +10,4 @@ accounts-ui
 bootstrap
 less
 twbs:bootstrap
+momentjs:moment

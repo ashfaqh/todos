@@ -11,6 +11,10 @@ if (Meteor.isClient) {
     },
     isChecked: function() {
       return this.isDone;
+    },
+    dateFormatter: function(createdOn) {
+      var formattedDate = moment(createdOn).format('LLL');
+      return formattedDate;
     }    
   });
   Template.TodoPanel.events({
@@ -55,13 +59,13 @@ if (Meteor.isServer) {
   });
   Meteor.methods({
     addItem: function(item) {
-      var today = new Date();
+//      var today = new Date();
       var user = Meteor.userId();
       Todos.insert({
         todoItem: item,
         isDone: false,
         createdBy: user,
-        createdOn: today
+        createdOn: new Date()
       });
     },
     setDone: function(id, isDone) {
